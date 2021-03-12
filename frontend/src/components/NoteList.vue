@@ -4,7 +4,7 @@
             .card-header
                 button.btn.btn-clear.float-right(@click="deleteNote(note)")
                 .card-title {{ operation[note.operation] }} | {{ categories[note.category-1].title }}
-                .card-subtitle {{ note.created_at }}
+                .card-subtitle {{ note.operation_date }}
             .card-body
                 .col-9 {{ note.body }}
                 .col-3 {{ note.amount }} &#x20bd;

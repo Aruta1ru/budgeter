@@ -2,6 +2,11 @@
     form.form-horizontal(@submit="submitForm")
         .form-group
             .col-3
+                label.form-label Дата
+            .col-5
+                datepicker(:language="ru" v-model="selectedDate" :monday-first="true" :format="customFormatter")
+        .form-group
+            .col-3
                 label.form-label Тип операции
             .col-2
                 div(v-for='op in operations')
@@ -23,7 +28,7 @@
         .form-group
             .col-3
                 label.form-label Сумма
-            .col-4
+            .col-5
                 input.form-input(type="text" v-model="amount" placeholder="Введите сумму операции...")
         .form-group
             .col-3
@@ -33,9 +38,15 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Datepicker from 'vuejs-datepicker'
+import { ru } from 'vuejs-datepicker/dist/locale'
+import moment from 'moment'
 
 export default {
   name: 'create-note',
+  components: {
+    'datepicker': Datepicker
+  },
   computed: {
     ...mapGetters(['categories']),
     formCategories: function () {
@@ -53,7 +64,9 @@ export default {
       'operations': [
         { name: 'INCOME', title: 'Доход' },
         { name: 'EXPENSES', title: 'Расход' }
-      ]
+      ],
+      'ru': ru,
+      'selectedDate': moment().format('yyyy-MM-DD')
     }
   },
   methods: {
@@ -70,8 +83,12 @@ export default {
         amount: this.amount,
         body: this.body,
         category: this.selectedCategory,
-        operation: this.operationPicked
+        operation: this.operationPicked,
+        selected_date: this.selectedDate
       })
+    },
+    customFormatter (date) {
+      return moment(date).format('yyyy-MM-DD')
     }
   },
   beforeMount () {

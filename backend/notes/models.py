@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.db import models
 
 OPERATION_CHOICES = (
@@ -15,6 +17,7 @@ class Note(models.Model):
     operation = models.CharField(max_length=8,
                                  choices=OPERATION_CHOICES,
                                  default="EXPENSES")
+    operation_date = models.DateField(default=date.today)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

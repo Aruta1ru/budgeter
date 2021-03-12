@@ -2,15 +2,14 @@
 #app
   section.container.grid-960
     .columns
-      .column.col-2
-      .column.col-8.col-md-12
+      .column.col-6
         header.text-center
           h2 Добавить операцию
         create-note
+      .column.col-6
         header.text-center
           h2 Список операций
         note-list
-      .column.col-2
 </template>
 
 <script>
